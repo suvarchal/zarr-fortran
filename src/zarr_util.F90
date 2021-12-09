@@ -1,7 +1,7 @@
 module zarr_util
 implicit none
 private
-public :: get_zgroup_json, get_zattrs_json, get_zarray_json
+public :: get_zgroup_json, get_zattrs_json, get_zarray_json, byteorder
 
 !interface write_dataarray
 !   module procedure write_real_1darray, write_real_2darray!, write_real3darray, write_real4darray,  &
@@ -123,4 +123,19 @@ contains
 !          real(
 !  end subroutine write_real_1darray
 
+  function byteorder()
+    integer :: fileunit
+    character(13) :: endian_string
+    character     :: byteorder
+    open(newunit=fileunit, status="scratch")
+    inquire(fileunit, convert=endian_string)
+    if (endian_string=="LITTLE_ENDIAN") then
+          byteorder = "<"
+    else if (endian_string=="BIG_ENDIAN") then
+          byteorder = ">"
+    else
+         print *, "byteorder of machine is unknown, using little endian, use convert option in open to encode data in little endian" 
+         byteorder = "<"
+    end if
+  end function byteorder
 end module zarr_util 
