@@ -59,7 +59,7 @@ contains
      
 
      !dtype should be inferred from data
-     print *, dtype
+     !print *, dtype
      tmp_text = ',"dtype":"' // trim(dtype) //'"'     
      json_text = adjustl(trim(json_text)) // tmp_text
 
