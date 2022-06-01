@@ -134,7 +134,7 @@ contains
     else if (endian_string=="BIG_ENDIAN") then
           byteorder = ">"
     else
-         print *, "byteorder of machine is unknown, using little endian, use convert option in open to encode data in little endian" 
+         !print *, "byteorder of machine is unknown, using little endian, use convert option in open to encode data in little endian" 
          byteorder = "<"
     end if
   end function byteorder
